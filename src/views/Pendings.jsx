@@ -17,68 +17,12 @@ import {
   TableContainer,
   useMediaQuery,
   Stack,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Select,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
 
-const AllTrips = () => {
+const PendingTrips = () => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [tripsData, setTripsData] = useState([
-    { 
-      id: 1, 
-      tripId: 100036, 
-      bookingDate: "08 Feb 2025", 
-      scheduleAt: "2025-02-08T12:40", 
-      customerInfo: "Jhon j*********@gmail.com", 
-      driverInfo: "Unassigned", 
-      vehicleInfo: "Unassigned", 
-      tripType: "Hourly Instant", 
-      tripAmount: "$247.50", 
-      tripStatus: "Pending" 
-    },
-    { 
-      id: 2, 
-      tripId: 100035, 
-      bookingDate: "06 Feb 2025", 
-      scheduleAt: "2025-02-06T17:56", 
-      customerInfo: "Jonathon Jack s*********@gmail.com", 
-      driverInfo: "Unassigned", 
-      vehicleInfo: "Unassigned", 
-      tripType: "Hourly Instant", 
-      tripAmount: "$33.75", 
-      tripStatus: "Confirmed" 
-    },
-    { 
-      id: 3, 
-      tripId: 100033, 
-      bookingDate: "06 Feb 2025", 
-      scheduleAt: "2025-02-06T17:43", 
-      customerInfo: "MS 133 m*******@gmail.com", 
-      driverInfo: "Unassigned", 
-      vehicleInfo: "Unassigned", 
-      tripType: "Distance wise Instant", 
-      tripAmount: "$180.60", 
-      tripStatus: "Pending" 
-    },
-    { 
-      id: 4, 
-      tripId: 100031, 
-      bookingDate: "06 Feb 2025", 
-      scheduleAt: "2025-02-06T15:22", 
-      customerInfo: "Jonathon Jack s*********@gmail.com", 
-      driverInfo: "Ruth Kerry kuzo****@gmail.com", 
-      vehicleInfo: "1 Vehicles", 
-      tripType: "Distance wise Instant", 
-      tripAmount: "$180.60", 
-      tripStatus: "Completed" 
-    },
-  ]);
-
   const [formData, setFormData] = useState({
     tripId: "",
     bookingDate: "",
@@ -93,7 +37,63 @@ const AllTrips = () => {
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const navigate = useNavigate();
+
+  // Static trips data
+  const tripsData = [
+    { 
+      id: 1, 
+      tripId: 100036, 
+      bookingDate: "08 Feb 2025", 
+      scheduleAt: "08 Feb 2025 12:40pm", 
+      customerInfo: "Jhon j*********@gmail.com", 
+      driverInfo: "Unassigned", 
+      vehicleInfo: "Unassigned", 
+      tripType: "Hourly\nInstant", 
+      tripAmount: "$247.50", 
+      tripStatus: "Pending\nUnpaid" 
+    },
+    { 
+      id: 2, 
+      tripId: 100035, 
+      bookingDate: "06 Feb 2025", 
+      scheduleAt: "06 Feb 2025 05:56pm", 
+      customerInfo: "Jonathon Jack s*********@gmail.com", 
+      driverInfo: "Unassigned", 
+      vehicleInfo: "Unassigned", 
+      tripType: "Hourly\nInstant", 
+      tripAmount: "$33.75", 
+      tripStatus: "Confirmed\nUnpaid" 
+    },
+    { 
+      id: 3, 
+      tripId: 100033, 
+      bookingDate: "06 Feb 2025", 
+      scheduleAt: "06 Feb 2025 05:43pm", 
+      customerInfo: "MS 133 m*******@gmail.com", 
+      driverInfo: "Unassigned", 
+      vehicleInfo: "Unassigned", 
+      tripType: "Distance wise\nInstant", 
+      tripAmount: "$180.60", 
+      tripStatus: "Pending\nUnpaid" 
+    },
+    { 
+      id: 4, 
+      tripId: 100031, 
+      bookingDate: "06 Feb 2025", 
+      scheduleAt: "06 Feb 2025 03:22pm", 
+      customerInfo: "Jonathon Jack s*********@gmail.com", 
+      driverInfo: "Ruth Kerry kuzo****@gmail.com", 
+      vehicleInfo: "1 Vehicles", 
+      tripType: "Distance wise\nInstant", 
+      tripAmount: "$180.60", 
+      tripStatus: "Completed\nPaid" 
+    },
+  ];
+
+  // Filter for Pending trips only
+  const pendingTrips = tripsData.filter(trip =>
+    trip.tripStatus.toLowerCase().includes("pending")
+  );
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -120,25 +120,15 @@ const AllTrips = () => {
     setSearch(e.target.value);
   };
 
-  const handleSaveTrip = () => {
-    const newTrip = {
-      ...formData,
-      id: tripsData.length + 1,
-    };
-    setTripsData((prev) => [...prev, newTrip]);
-    handleClose();
-  };
-
-  const filteredTrips = tripsData.filter(
-    (trip) =>
-      trip.tripId.toString().includes(search) ||
-      trip.customerInfo.toLowerCase().includes(search.toLowerCase())
+  const filteredTrips = pendingTrips.filter(trip =>
+    trip.tripId.toString().includes(search) ||
+    trip.customerInfo.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <Box p={2}>
       <Typography variant="h4" gutterBottom>
-        All Trips
+        Pending Trips
       </Typography>
 
       <Paper sx={{ mt: 2, width: "100%" }}>
@@ -188,9 +178,7 @@ const AllTrips = () => {
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{trip.tripId}</TableCell>
                   <TableCell>{trip.bookingDate}</TableCell>
-                  <TableCell>
-                    {new Date(trip.scheduleAt).toLocaleString()}
-                  </TableCell>
+                  <TableCell>{trip.scheduleAt}</TableCell>
                   <TableCell>{trip.customerInfo}</TableCell>
                   <TableCell>{trip.driverInfo}</TableCell>
                   <TableCell>{trip.vehicleInfo}</TableCell>
@@ -199,16 +187,19 @@ const AllTrips = () => {
                   <TableCell>{trip.tripStatus}</TableCell>
                   <TableCell>
                     <Stack direction="row" spacing={1}>
-                      <Button variant="outlined" size="small">
-                        Download
-                      </Button>
-                      <Button variant="outlined" size="small">
-                        View
-                      </Button>
+                      <Button variant="outlined" size="small">Download</Button>
+                      <Button variant="outlined" size="small">View</Button>
                     </Stack>
                   </TableCell>
                 </TableRow>
               ))}
+              {filteredTrips.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={11} align="center">
+                    No pending trips found
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
@@ -221,7 +212,7 @@ const AllTrips = () => {
         fullWidth
         fullScreen={fullScreen}
       >
-        <DialogTitle>Add New Trip</DialogTitle>
+        <DialogTitle>Add New Pending Trip</DialogTitle>
         <DialogContent dividers>
           <TextField
             fullWidth
@@ -235,8 +226,6 @@ const AllTrips = () => {
             fullWidth
             label="Booking Date"
             name="bookingDate"
-            type="date"
-            InputLabelProps={{ shrink: true }}
             value={formData.bookingDate}
             onChange={handleChange}
             sx={{ mb: 2 }}
@@ -245,8 +234,6 @@ const AllTrips = () => {
             fullWidth
             label="Schedule At"
             name="scheduleAt"
-            type="datetime-local"
-            InputLabelProps={{ shrink: true }}
             value={formData.scheduleAt}
             onChange={handleChange}
             sx={{ mb: 2 }}
@@ -291,33 +278,22 @@ const AllTrips = () => {
             onChange={handleChange}
             sx={{ mb: 2 }}
           />
-
-          {/* Trip Status Dropdown */}
-          <FormControl fullWidth sx={{ mb: 2 }}>
-            <InputLabel>Status</InputLabel>
-            <Select
-              name="tripStatus"
-              value={formData.tripStatus}
-              onChange={handleChange}
-              label="Status"
-            >
-              <MenuItem value="Pending">Pending</MenuItem>
-              <MenuItem value="Ongoing">Ongoing</MenuItem>
-              <MenuItem value="Confirmed">Confirmed</MenuItem>
-              <MenuItem value="Completed">Completed</MenuItem>
-              <MenuItem value="Canceled">Canceled</MenuItem>
-            </Select>
-          </FormControl>
+          <TextField
+            fullWidth
+            label="Trip Status"
+            name="tripStatus"
+            value={formData.tripStatus}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" onClick={handleSaveTrip}>
-            Save
-          </Button>
+          <Button variant="contained" onClick={handleClose}>Save</Button>
         </DialogActions>
       </Dialog>
     </Box>
   );
 };
 
-export default AllTrips;
+export default PendingTrips;

@@ -27,7 +27,7 @@ const Marketingsection = {
       id: 'Coupon',
       title: 'Coupon',
       type: 'item',
-      url: '/providers/new',
+      url: '/providers/newcoupon',
       icon: icons.IconUserPlus,
       breadcrumbs: false
     },
@@ -35,7 +35,7 @@ const Marketingsection = {
       id: 'Banners',
       title: 'Banners',
       type: 'item',
-      url: '/providers/add',
+      url: '/providers/banner',
       icon: icons.IconUserCheck,
       breadcrumbs: false
     },

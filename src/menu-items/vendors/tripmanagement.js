@@ -49,7 +49,7 @@ const tripmanagement = {
   children: [
     {
       id: 'trips',
-      title: 'Trips',
+      title: 'Bookings',
       type: 'collapse',
       icon: icons.IconBuildingSkyscraper,
       children: [

@@ -85,7 +85,7 @@ export default function NotificationSection() {
 
   return (
     <>
-      <Box sx={{ ml: 2 }}>
+      {/* <Box sx={{ ml: 2 }}>
         <Avatar
           variant="rounded"
           sx={{
@@ -193,7 +193,7 @@ export default function NotificationSection() {
             </Transitions>
           </ClickAwayListener>
         )}
-      </Popper>
+      </Popper> */}
     </>
   );
 }

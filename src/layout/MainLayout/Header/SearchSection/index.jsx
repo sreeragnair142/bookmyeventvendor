@@ -101,7 +101,7 @@ export default function SearchSection() {
 
   return (
     <>
-      <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+      {/* <Box sx={{ display: { xs: 'block', md: 'none' } }}>
         <PopupState variant="popper" popupId="demo-popup-popper">
           {(popupState) => (
             <>
@@ -157,7 +157,7 @@ export default function SearchSection() {
           slotProps={{ input: { 'aria-label': 'weight', sx: { bgcolor: 'transparent', pl: 0.5 } } }}
           sx={{ width: { md: 250, lg: 434 }, ml: 2, px: 2 }}
         />
-      </Box>
+      </Box> */}
     </>
   );
 }

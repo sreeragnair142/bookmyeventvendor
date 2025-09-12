@@ -27,7 +27,7 @@ const Businesssection = {
       id: 'Provider-Config',
       title: 'Provider Config',
       type: 'item',
-      url: '/providers/new',
+      url: '/business/new',
       icon: icons.IconUserPlus,
       breadcrumbs: false
     },
@@ -35,7 +35,7 @@ const Businesssection = {
       id: 'Notification-SetUP',
       title: 'Notification Set UP',
       type: 'item',
-      url: '/providers/add',
+      url: '/business/add',
       icon: icons.IconUserCheck,
       breadcrumbs: false
     },
@@ -43,7 +43,7 @@ const Businesssection = {
       id: 'My-Shop',
       title: 'My Shop',
       type: 'item',
-      url: '/providers/list',
+      url: '/business/list',
       icon: icons.IconUsers,
       breadcrumbs: false
     },
@@ -51,7 +51,7 @@ const Businesssection = {
       id: 'My-Business-Plan',
       title: 'My Business Plan',
       type: 'item',
-      url: '/providers/import',
+      url: '/business/plan',
       icon: icons.IconUpload,
       breadcrumbs: false
     },
@@ -59,7 +59,7 @@ const Businesssection = {
       id: 'My-Wallet',
       title: 'My Wallet',
       type: 'item',
-      url: '/providers/export',
+      url: '/business/export',
       icon: icons.IconDownload,
       breadcrumbs: false
     },
@@ -67,7 +67,7 @@ const Businesssection = {
       id: 'Disbursement-Method',
       title: 'Disbursement Method',
       type: 'item',
-      url: '/providers/export',
+      url: '/business/disburse',
       icon: icons.IconDownload,
       breadcrumbs: false
     },
@@ -75,7 +75,7 @@ const Businesssection = {
       id: 'Reviews',
       title: 'Reviews',
       type: 'item',
-      url: '/providers/export',
+      url: '/business/review',
       icon: icons.IconDownload,
       breadcrumbs: false
     },
@@ -83,7 +83,7 @@ const Businesssection = {
       id: 'Chat',
       title: 'Chat',
       type: 'item',
-      url: '/providers/export',
+      url: '/business/chat',
       icon: icons.IconDownload,
       breadcrumbs: false
     }

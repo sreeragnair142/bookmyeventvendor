@@ -17,65 +17,43 @@ import {
   TableContainer,
   useMediaQuery,
   Stack,
-  MenuItem,
   FormControl,
   InputLabel,
   Select,
+  MenuItem,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
 
-const AllTrips = () => {
-  const [open, setOpen] = useState(false);
+const OngoingTrips = () => {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [search, setSearch] = useState("");
+  const [open, setOpen] = useState(false);
   const [tripsData, setTripsData] = useState([
-    { 
-      id: 1, 
-      tripId: 100036, 
-      bookingDate: "08 Feb 2025", 
-      scheduleAt: "2025-02-08T12:40", 
-      customerInfo: "Jhon j*********@gmail.com", 
-      driverInfo: "Unassigned", 
-      vehicleInfo: "Unassigned", 
-      tripType: "Hourly Instant", 
-      tripAmount: "$247.50", 
-      tripStatus: "Pending" 
+    {
+      id: 1,
+      tripId: 100036,
+      bookingDate: "08 Feb 2025",
+      scheduleAt: "2025-02-08T12:40",
+      customerInfo: "Jhon j*********@gmail.com",
+      driverInfo: "Unassigned",
+      vehicleInfo: "Unassigned",
+      tripType: "Hourly Instant",
+      tripAmount: "$247.50",
+      tripStatus: "Pending",
     },
-    { 
-      id: 2, 
-      tripId: 100035, 
-      bookingDate: "06 Feb 2025", 
-      scheduleAt: "2025-02-06T17:56", 
-      customerInfo: "Jonathon Jack s*********@gmail.com", 
-      driverInfo: "Unassigned", 
-      vehicleInfo: "Unassigned", 
-      tripType: "Hourly Instant", 
-      tripAmount: "$33.75", 
-      tripStatus: "Confirmed" 
-    },
-    { 
-      id: 3, 
-      tripId: 100033, 
-      bookingDate: "06 Feb 2025", 
-      scheduleAt: "2025-02-06T17:43", 
-      customerInfo: "MS 133 m*******@gmail.com", 
-      driverInfo: "Unassigned", 
-      vehicleInfo: "Unassigned", 
-      tripType: "Distance wise Instant", 
-      tripAmount: "$180.60", 
-      tripStatus: "Pending" 
-    },
-    { 
-      id: 4, 
-      tripId: 100031, 
-      bookingDate: "06 Feb 2025", 
-      scheduleAt: "2025-02-06T15:22", 
-      customerInfo: "Jonathon Jack s*********@gmail.com", 
-      driverInfo: "Ruth Kerry kuzo****@gmail.com", 
-      vehicleInfo: "1 Vehicles", 
-      tripType: "Distance wise Instant", 
-      tripAmount: "$180.60", 
-      tripStatus: "Completed" 
+    {
+      id: 2,
+      tripId: 100035,
+      bookingDate: "06 Feb 2025",
+      scheduleAt: "2025-02-06T17:56",
+      customerInfo: "Jonathon Jack s*********@gmail.com",
+      driverInfo: "Unassigned",
+      vehicleInfo: "Unassigned",
+      tripType: "Hourly Instant",
+      tripAmount: "$33.75",
+      tripStatus: "Confirmed",
     },
   ]);
 
@@ -91,9 +69,12 @@ const AllTrips = () => {
     tripStatus: "",
   });
 
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const navigate = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSearchChange = (e) => setSearch(e.target.value);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -111,25 +92,18 @@ const AllTrips = () => {
     });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
-
   const handleSaveTrip = () => {
-    const newTrip = {
-      ...formData,
-      id: tripsData.length + 1,
-    };
+    const newTrip = { ...formData, id: tripsData.length + 1 };
     setTripsData((prev) => [...prev, newTrip]);
     handleClose();
   };
 
-  const filteredTrips = tripsData.filter(
+  const ongoingTrips = tripsData.filter(
+    (trip) =>
+      trip.tripStatus === "Pending" || trip.tripStatus === "Confirmed"
+  );
+
+  const filteredTrips = ongoingTrips.filter(
     (trip) =>
       trip.tripId.toString().includes(search) ||
       trip.customerInfo.toLowerCase().includes(search.toLowerCase())
@@ -138,7 +112,7 @@ const AllTrips = () => {
   return (
     <Box p={2}>
       <Typography variant="h4" gutterBottom>
-        All Trips
+        Ongoing Trips
       </Typography>
 
       <Paper sx={{ mt: 2, width: "100%" }}>
@@ -149,9 +123,6 @@ const AllTrips = () => {
           alignItems={{ xs: "stretch", sm: "center" }}
           p={2}
         >
-          <Button variant="contained" onClick={handleOpen}>
-            Add New Trip
-          </Button>
           <TextField
             label="Search by trip ID, customer name, email"
             variant="outlined"
@@ -179,7 +150,6 @@ const AllTrips = () => {
                 <TableCell>Trip Type</TableCell>
                 <TableCell>Trip Amount</TableCell>
                 <TableCell>Trip Status</TableCell>
-                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -197,16 +167,6 @@ const AllTrips = () => {
                   <TableCell>{trip.tripType}</TableCell>
                   <TableCell>{trip.tripAmount}</TableCell>
                   <TableCell>{trip.tripStatus}</TableCell>
-                  <TableCell>
-                    <Stack direction="row" spacing={1}>
-                      <Button variant="outlined" size="small">
-                        Download
-                      </Button>
-                      <Button variant="outlined" size="small">
-                        View
-                      </Button>
-                    </Stack>
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -214,6 +174,7 @@ const AllTrips = () => {
         </TableContainer>
       </Paper>
 
+      {/* Add Trip Dialog (optional if you want Add New Trip here) */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -291,8 +252,6 @@ const AllTrips = () => {
             onChange={handleChange}
             sx={{ mb: 2 }}
           />
-
-          {/* Trip Status Dropdown */}
           <FormControl fullWidth sx={{ mb: 2 }}>
             <InputLabel>Status</InputLabel>
             <Select
@@ -320,4 +279,4 @@ const AllTrips = () => {
   );
 };
 
-export default AllTrips;
+export default OngoingTrips;

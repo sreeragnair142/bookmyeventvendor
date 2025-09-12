@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Add this import
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -36,6 +37,7 @@ import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons-re
 
 export default function ProfileSection() {
   const theme = useTheme();
+  const navigate = useNavigate(); // Add this hook
   const { borderRadius } = useConfig();
   const [sdm, setSdm] = useState(true);
   const [value, setValue] = useState('');
@@ -58,6 +60,20 @@ export default function ProfileSection() {
     }
 
     setOpen(false);
+  };
+
+  // Add logout handler
+  const handleLogout = () => {
+    // Clear any stored authentication data
+    localStorage.removeItem('token'); // Remove auth token
+    localStorage.removeItem('user'); // Remove user data
+    sessionStorage.clear(); // Clear session storage
+    
+    // Close the menu
+    setOpen(false);
+    
+    // Navigate to sign in page
+    navigate('/signin'); // Adjust the path as needed for your app
   };
 
   const prevOpen = useRef(open);
@@ -241,7 +257,11 @@ export default function ProfileSection() {
                             }
                           />
                         </ListItemButton>
-                        <ListItemButton sx={{ borderRadius: `${borderRadius}px` }} selected={selectedIndex === 4}>
+                        <ListItemButton 
+                          sx={{ borderRadius: `${borderRadius}px` }} 
+                          selected={selectedIndex === 4}
+                          onClick={handleLogout} // Add onClick handler
+                        >
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="20px" />
                           </ListItemIcon>

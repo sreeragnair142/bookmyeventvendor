@@ -1,14 +1,14 @@
 // assets
 import {
-  IconCar,           // for vehicle-related items
-  IconCategory,      // for categories
-  IconTrademark,     // for brands
-  IconPlus,          // create new
-  IconList,          // list
-  IconClipboardCheck,// review
-  IconUpload,        // bulk import
-  IconDownload,      // bulk export
-  IconEngine         // ongoing/active trips
+  IconCar,
+  IconCategory,
+  IconTrademark,
+  IconPlus,
+  IconList,
+  IconClipboardCheck,
+  IconUpload,
+  IconDownload,
+  IconEngine
 } from '@tabler/icons-react';
 
 // constants
@@ -28,42 +28,41 @@ const icons = {
 
 const vehiclemanagement = {
   id: 'vehicle-management',
-  title: 'VEHICLE MANAGEMENT',
+  title: 'VENUE MANAGEMENT',
   type: 'group',
   children: [
-     {
-          id: 'Vehicle-Setup',
-          title: 'Vehicle Setup',
-          type: 'collapse',
-          icon: icons.IconBuildingSkyscraper,  // <- changed icon here
-          children: [
-            {
-              id: 'Create-new',
-              title: 'Create New ',
-              type: 'item',
-              url: '/leads'
-            },
-            {
-              id: 'list',
-              title: 'List',
-              type: 'item',
-              url: '/leads/new'
-            },
-            {
-              id: 'Bulk-Import',
-              title: 'Bulk Import',
-              type: 'item',
-              url: '/leads/follow-up'
-            },
-            {
-              id: 'Bulk-Export',
-              title: 'Bulk Export',
-              type: 'item',
-              url: '/leads/converted'
-            },
-           
-          ]
+    {
+      id: 'vehicle-setup',
+      title: 'Venue Setup',
+      type: 'collapse',
+      icon: icons.IconCar, // updated icon
+      children: [
+        {
+          id: 'create-new',
+          title: 'Create New',
+          type: 'item',
+          url: '/vehicle-setup/leads'  // matches MainRoutes
         },
+        {
+          id: 'list',
+          title: 'List',
+          type: 'item',
+          url: '/vehicle-setup/lists'
+        },
+        {
+          id: 'bulk-import',
+          title: 'Bulk Import',
+          type: 'item',
+          url: '/vehicle-setup/bulk-import'
+        },
+        {
+          id: 'bulk-export',
+          title: 'Bulk Export',
+          type: 'item',
+          url: '/vehicle-setup/bulk-export'
+        }
+      ]
+    },
     {
       id: 'vehicle-brands',
       title: 'Brands',
@@ -73,14 +72,14 @@ const vehiclemanagement = {
       breadcrumbs: false
     },
     {
-      id: 'Categories',
+      id: 'categories',
       title: 'Categories',
       type: 'item',
-      url: '/vehicles/brands',
-      icon: icons.IconTrademark,
+      url: '/vehicles/categories',
+      icon: icons.IconCategory,
       breadcrumbs: false
-    },
-     ]
+    }
+  ]
 };
 
 export default vehiclemanagement;

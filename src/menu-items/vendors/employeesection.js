@@ -27,7 +27,7 @@ const Employeesection = {
       id: 'Employee-Role',
       title: 'Employee Role',
       type: 'item',
-      url: '/providers/new',
+      url: '/employee/role',
       icon: icons.IconUserPlus,
       breadcrumbs: false
     },
@@ -41,13 +41,13 @@ const Employeesection = {
               id: 'Create-new',
               title: 'Add New ',
               type: 'item',
-              url: '/leads'
+              url: '/employee/new'
             },
             {
               id: 'list',
               title: 'List',
               type: 'item',
-              url: '/leads/new'
+              url: '/employee/list'
             }
            
           ]

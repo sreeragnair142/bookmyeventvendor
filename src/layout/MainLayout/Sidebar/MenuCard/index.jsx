@@ -103,7 +103,7 @@ function MenuCard() {
             </ListItemAvatar>
             <ListItemText
               sx={{ mt: 0 }}
-              primary={
+              primary={ 
                 <Typography variant="subtitle1" sx={{ color: 'primary.800' }}>
                   Get Extra Space
                 </Typography>

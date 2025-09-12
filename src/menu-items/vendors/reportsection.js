@@ -27,7 +27,7 @@ const Reportsection = {
       id: 'Expense-Report',
       title: 'Expense Report',
       type: 'item',
-      url: '/providers/new',
+      url: '/report/expense',
       icon: icons.IconUserPlus,
       breadcrumbs: false
     },
@@ -35,7 +35,7 @@ const Reportsection = {
       id: 'Disbursement-Method',
       title: 'Disbursement Method',
       type: 'item',
-      url: '/providers/add',
+      url: '/report/disburse',
       icon: icons.IconUserCheck,
       breadcrumbs: false
     },
@@ -43,7 +43,7 @@ const Reportsection = {
       id: 'Trip-Report',
       title: 'Trip Report',
       type: 'item',
-      url: '/providers/list',
+      url: '/report/trip',
       icon: icons.IconUsers,
       breadcrumbs: false
     },
@@ -51,7 +51,7 @@ const Reportsection = {
       id: 'Vat-Report',
       title: 'Vat Report',
       type: 'item',
-      url: '/providers/import',
+      url: '/report/vat',
       icon: icons.IconUpload,
       breadcrumbs: false
     },

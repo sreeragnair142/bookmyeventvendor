@@ -13,7 +13,7 @@ import Tripmanagement from './vendors/tripmanagement';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard,Tripmanagement,vehiclemanagement,Driversection,Marketingsection,Businesssection,Reportsection,Employeesection]
+  items: [dashboard,Tripmanagement,vehiclemanagement,Marketingsection,Businesssection,Reportsection,Employeesection]
 };
 
 export default menuItems;
